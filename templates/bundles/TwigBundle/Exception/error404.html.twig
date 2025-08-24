@@ -1,0 +1,10 @@
+{% extends 'bundles/TwigBundle/Exception/base.html.twig' %}
+
+{% block title %} {{ parent() ~ 'page.404'|trans  }}  {% endblock %}
+{% block status_code %}404{% endblock %}
+
+{% block body %}
+    <p class="lead mt-4 text-800 font-sans-serif fw-semi-bold w-md-75 w-xl-100 mx-auto">{{ 'page.404'|trans }}</p>
+    <hr />
+    <a class="btn btn-primary btn-sm mt-3" href="{{ path('app_home') }}"><span class="fas fa-home me-2"></span>{{ 'homepage'|trans }}</a>
+{% endblock %}

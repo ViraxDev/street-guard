@@ -1,0 +1,12 @@
+password.changed.email: 'Votre demande de changement de mot de passe.'
+password.reset.request: 'Demande de réinitialisation de mot de passe'
+password.reset.email.sent: 'Mail de réinitialisation envoyé'
+password.reset.email.body: |
+  <h3 class="mb-2">Vous pouvez vérifier votre boîte mail !</h3>
+  <p>Si un compte correspond à un mail existant, vous devriez avoir reçu un mail contenant un lien que vous pouvez utiliser pour faire la réinitialisation.</p>
+  <p>Pensez à vérifier également dans votre dossier de spam.</p>
+link.expires.in: 'Ce lien expire dans '
+hello: 'Hello'
+reset.link: 'Pour réinitialiser votre mot de passe, merci de cliquer sur le lien suivant'
+reset.password: 'Réinitialiser le mot de passe'
+ignore.email: "Veuillez ignorer ce mail si vous n'avez pas fait de demande."

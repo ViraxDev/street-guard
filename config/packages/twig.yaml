@@ -1,0 +1,9 @@
+twig:
+    file_name_pattern: '*.twig'
+    globals:
+        upload_dir: '%upload_directory%'
+        app_name: '%app_name%'
+
+when@test:
+    twig:
+        strict_variables: true

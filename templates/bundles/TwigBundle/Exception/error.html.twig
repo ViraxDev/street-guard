@@ -1,0 +1,9 @@
+{% extends 'bundles/TwigBundle/Exception/base.html.twig' %}
+
+{% block title %} {{ parent() ~ 'page.500'|trans  }}  {% endblock %}
+
+{% block body %}
+    <p class="lead mt-4 text-800 font-sans-serif fw-semi-bold">{{ 'page.500'|trans }}</p>
+    <hr />
+    <a class="btn btn-primary btn-sm mt-3" href="{{ path('app_home') }}"><span class="fas fa-home me-2"></span>{{ 'homepage'|trans }}</a>
+{% endblock %}

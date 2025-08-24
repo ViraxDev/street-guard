@@ -1,0 +1,11 @@
+{% extends 'bundles/TwigBundle/Exception/base.html.twig' %}
+
+{% block title %} {{ parent() ~ 'page.500'|trans  }}  {% endblock %}
+
+{% block status_code %}500{% endblock %}
+
+{% block body %}
+    <p class="lead mt-4 text-800 font-sans-serif fw-semi-bold">{{ 'page.500'|trans }}</p>
+    <hr />
+    <p>{{ 'page.500.description'|trans }}</p>
+{% endblock %}

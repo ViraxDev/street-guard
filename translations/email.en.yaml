@@ -1,0 +1,12 @@
+password.changed.email: 'Your password change request.'
+password.reset.request: 'Password reset request'
+password.reset.email.sent: 'Password reset email sent'
+password.reset.email.body: |
+  <h3 class="mb-2">You can check your email inbox!</h3>
+  <p>If an account matches an existing email, you should have received an email containing a link you can use for the reset.</p>
+  <p>Remember to also check your spam folder.</p>
+link.expires.in: 'This link expires in '
+hello: 'Hello'
+reset.link: 'To reset your password, please click on the following link'
+reset.password: 'Reset password'
+ignore.email: 'Please ignore this email if you did not make a request.'
