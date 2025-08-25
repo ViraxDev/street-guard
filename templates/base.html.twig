@@ -5,7 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}StreetGuard{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('assets/tailwind.css') }}">
+
+    {# TODO : don't forget to change that #}
+    {% if app.environment == 'prod' %}
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    {% else %}
+        <link rel="stylesheet" href="{{ asset('assets/tailwind.css') }}">
+    {% endif %}
+
+    <link rel="icon" href="{{ asset('img/logo.ico') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
       /* Minimal fallback so text remains legible even if Tailwind fails to load */
