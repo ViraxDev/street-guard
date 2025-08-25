@@ -29,18 +29,18 @@ deploy: ## Deploy the branch on remote server
 	printf "\n"; \
 	printf "$(RESET)"; \
 	printf "$(BLUE)Deploying branch: $$branch_name$(RESET)\n"; \
-	git fetch -a && git checkout "$$branch_name" && git reset --hard && git pull --rebase; \
-	composer install --no-dev --optimize-autoloader; \
-	npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css; \
-	bin/console importmap:install; \
-	bin/console asset-map:compile; \
-	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear; \
+	git fetch --all && git checkout "$$branch_name" && git reset --hard && git pull --rebase; \
+	$(DOCKER_ROOT) composer install --no-dev --optimize-autoloader --no-interaction; \
+	$(DOCKER_ROOT) sh -lc "npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css"; \
+	$(DOCKER_ROOT) php bin/console importmap:install; \
+	$(DOCKER_ROOT) php bin/console asset-map:compile; \
+	$(DOCKER_ROOT) APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear; \
 	printf "$(GREEN)Branch '$$branch_name' deployed successfully.$(RESET)\n";
 
 install: create-network start composer-install npm-install ## Install dependencies
 
 npm-install: ## Install npm dependencies
-	$(DOCKER_ROOT) npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css
+	$(DOCKER_ROOT) sh -lc "npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css"
 
 php-cs-fixer: composer-install ## Apply coding standards with php-cs-fixer
 	$(DOCKER_ROOT) vendor/bin/php-cs-fixer fix
