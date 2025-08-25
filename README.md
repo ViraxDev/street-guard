@@ -38,8 +38,9 @@ This repository includes a Docker-based setup, build tooling, and helper scripts
    - `npm install`
    - `npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css`
 4. Visit the app:
-   - Home: http://localhost:8000/ (or the port exposed by your compose setup)
-   - Full map: http://localhost:8000/map
+   - Home: http://localhost/ (default)
+   - Full map: http://localhost/map
+   - PhpMyAdmin: http://localhost:8080/ (or https://localhost:8443/)
 
 To stop the stack: `make stop`. To restart: `make restart`.
 
