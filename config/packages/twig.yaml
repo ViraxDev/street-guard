@@ -3,6 +3,7 @@ twig:
     globals:
         upload_dir: '%upload_directory%'
         app_name: '%app_name%'
+        mapbox_token: '%env(MAPBOX_TOKEN)%'
 
 when@test:
     twig:

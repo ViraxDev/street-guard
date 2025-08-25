@@ -57,7 +57,9 @@ export default class extends Controller {
     this.map = new window.mapboxgl.Map({
       container: this.element,
       style: 'mapbox://styles/mapbox/standard',
-      center: this.latValue && this.lngValue ? [this.latValue, this.lngValue] : [defaults.lat, defaults.lng],
+      center: (Number.isFinite(this.lngValue) && Number.isFinite(this.latValue))
+        ? [this.lngValue, this.latValue]
+        : (defaults.center || [defaults.lng, defaults.lat]),
       zoom: Number.isFinite(this.zoomValue) ? this.zoomValue : defaults.zoom,
       pitch: Number.isFinite(this.pitchValue) ? this.pitchValue : defaults.pitch,
       bearing: Number.isFinite(this.bearingValue) ? this.bearingValue : defaults.bearing,
@@ -180,21 +182,18 @@ export default class extends Controller {
   defaultsForMode(mode) {
     if (mode === 'full') {
       return {
-        center: [-0.1276, 51.5074], // London
+        center: [-0.1276, 51.5074], // [lng, lat] — London
         zoom: 13,
         pitch: 45,
-        bearing: -17.6,
-        lat: -0.1276,
-        lng: 51.5074,
+        bearing: -17.6
       }
     }
     // card (default)
     return {
+      center: [-0.1276, 51.5074], // [lng, lat] — London
       zoom: 12,
       pitch: 45,
-      bearing: -17.6,
-      lat: -0.1276,
-      lng: 51.5074,
+      bearing: -17.6
     }
   }
 }
