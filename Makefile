@@ -31,7 +31,7 @@ deploy: ## Deploy the branch on remote server
 	printf "$(BLUE)Deploying branch: $$branch_name$(RESET)\n"; \
 	git fetch -a && git checkout "$$branch_name" && git reset --hard && git pull --rebase; \
 	composer install --no-dev --optimize-autoloader; \
-	npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css \
+	npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css; \
 	bin/console importmap:install; \
 	bin/console asset-map:compile; \
 	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear; \
