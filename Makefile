@@ -1,4 +1,4 @@
-.PHONY: bash composer-install create-network help install new-project php-cs-fixer phpstan restart start stop
+.PHONY: bash composer-install create-network deploy help install php-cs-fixer phpstan restart start stop
 .DEFAULT_GOAL := help
 
 DOCKER_ROOT=docker exec -t --user root $(shell docker ps --filter name=street-guard_app -q)
@@ -17,43 +17,25 @@ composer-install: ## Run composer install
 
 check-code: phpstan php-cs-fixer ## Fixes code style issues and analyze PHP code for errors
 
-new-project:
-	@echo "$(BLUE)"
-	@read -p "New project name: " project_name; \
-	read -p "Database name: " db_name; \
-	read -p "Git repository URL (leave blank to skip): " git_url; \
-	echo "Creating a new project..."; \
-	cp -r . "../$$project_name"; \
-	cd "../$$project_name"; \
-	rm README.md && echo "# crm" >> README.md && rm .env.local; \
-	rm -rf .git; \
-	git init; \
-	git config --unset-all remote.upstream.url; \
-	git config --unset-all remote.upstream.fetch; \
-	git config --unset-all branch.initial_commit.remote; \
-	sed -i.bak 's/APP_NAME=.*/APP_NAME='"$$project_name"'/' .env && rm .env.bak; \
-	sed -i.bak 's/DATABASE_NAME=.*/DATABASE_NAME='"$$db_name"'/' .env && rm .env.bak; \
-	sed -i.bak 's/street-guard_app/'"$$project_name"'_app/g' docker-compose.yml && rm docker-compose.yml.bak; \
-	sed -i.bak 's/app-network/'"$$project_name"'_network/g' docker-compose.yml && rm docker-compose.yml.bak; \
-	sed -i.bak 's/street-guard/'"$$project_name"'/g' Makefile && rm Makefile.bak; \
-	sed -i.bak 's/street-guard_app/'"$$project_name"'_app/g' Makefile && rm Makefile.bak; \
-	sed -i.bak 's/street-guard_app/'"$$project_name"'_app/g' infrastructure/nginx/conf.d/default.conf && rm infrastructure/nginx/conf.d/default.conf.bak; \
-	if [ -n "$$git_url" ]; then \
-		git remote add origin $$git_url; \
-		echo "Git repository initialized and remote origin set to $$git_url"; \
-	fi; \
-	read -p "Enter your Git user.name: " git_user_name; \
-	read -p "Enter your Git user.email: " git_user_email; \
-	git config user.name "$$git_user_name"; \
-	git config user.email "$$git_user_email"; \
-	git add .; \
-	git commit -m "Initial commit"; \
-	echo "$(GREEN)New project '$$project_name' successfully created and Git initialized."; \
-	echo "$(YELLOW)Don't forget to check and adjust other parameters in the .env file if necessary."; \
-	echo "$(YELLOW)You may want to push your initial commit to the remote repository."
-
 create-network: ## Create network
 	-docker network create app-network
+
+deploy: ## Deploy the branch on remote server
+	@printf "$(BLUE)Branch name to deploy [main]: $(RESET)"
+	@read branch_name; \
+	if [ -z "$$branch_name" ]; then \
+		branch_name="main"; \
+	fi; \
+	printf "\n"; \
+	printf "$(RESET)"; \
+	printf "$(BLUE)Deploying branch: $$branch_name$(RESET)\n"; \
+	git fetch -a && git checkout "$$branch_name" && git reset --hard && git pull --rebase; \
+	composer install --no-dev --optimize-autoloader; \
+	npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css \
+	bin/console importmap:install; \
+	bin/console asset-map:compile; \
+	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear; \
+	printf "$(GREEN)Branch '$$branch_name' deployed successfully.$(RESET)\n";
 
 install: create-network start composer-install ## Install dependencies
 
