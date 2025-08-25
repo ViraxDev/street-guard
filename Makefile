@@ -34,7 +34,7 @@ deploy: ## Deploy the branch on remote server
 	$(DOCKER_ROOT) sh -lc "npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css"; \
 	$(DOCKER_ROOT) php bin/console importmap:install; \
 	$(DOCKER_ROOT) php bin/console asset-map:compile; \
-	$(DOCKER_ROOT) APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear; \
+	$(DOCKER_ROOT) php bin/console cache:clear; \
 	printf "$(GREEN)Branch '$$branch_name' deployed successfully.$(RESET)\n";
 
 install: create-network start composer-install npm-install ## Install dependencies
