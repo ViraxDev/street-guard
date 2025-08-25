@@ -1,4 +1,4 @@
-.PHONY: bash composer-install create-network deploy help install php-cs-fixer phpstan restart start stop
+.PHONY: bash composer-install create-network deploy help install npm-install php-cs-fixer phpstan restart start stop
 .DEFAULT_GOAL := help
 
 DOCKER_ROOT=docker exec -t --user root $(shell docker ps --filter name=street-guard_app -q)
@@ -37,7 +37,10 @@ deploy: ## Deploy the branch on remote server
 	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear; \
 	printf "$(GREEN)Branch '$$branch_name' deployed successfully.$(RESET)\n";
 
-install: create-network start composer-install ## Install dependencies
+install: create-network start composer-install npm-install ## Install dependencies
+
+npm-install: ## Install npm dependencies
+	$(DOCKER_ROOT) npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css
 
 php-cs-fixer: composer-install ## Apply coding standards with php-cs-fixer
 	$(DOCKER_ROOT) vendor/bin/php-cs-fixer fix
