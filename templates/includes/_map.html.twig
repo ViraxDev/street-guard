@@ -1,0 +1,53 @@
+<section id="map" class="relative z-10 px-6 pb-20">
+    <div class="max-w-6xl mx-auto">
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden animate-fade-in delay-200">
+            <div class="p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="max-w-xl">
+                    <h3 class="text-2xl md:text-3xl tracking-tight font-medium">High‑Risk Zone Map</h3>
+                    <p class="text-gray-300 mt-3 text-sm md:text-base">Live incident density and recent reports
+                        appear instantly—pinpointing areas to avoid and safer routes to take.</p>
+                    <div class="mt-5 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                        <a href="{{ path('app_map') }}" rel="noopener"
+                           class="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-cyan-600 text-white rounded-full text-sm font-medium hover:from-emerald-600 hover:to-cyan-700 transition-all shadow-lg hover:shadow-xl flex items-center">
+                            Open Map
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="ml-2"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                 stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-up-right"></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-6 md:mt-0 md:w-[48%]">
+                    <div class="rounded-xl border border-white/10 overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 relative">
+                        <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(transparent_1px,rgba(255,255,255,0.04)_1px)] [background-size:16px_极6px]"></div>
+                        <div class="p-4 flex items-center justify-between text-xs text-gray-300 border极-bottom border-white/10 flex-wrap gap-2">
+                            <div class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-rose-400 mr-2"></span> High Alert
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-amber-300 mr-2"></span> Medium
+                            </div>
+                            <div class="flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2"></span> Low
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div
+                                    id="mapbox-map"
+                                    class="h-64 rounded-lg relative border border-white/10"
+                                    data-controller="mapbox"
+                                    data-mapbox-mode-value="card"
+                                    data-mapbox-token="pk.eyJ1IjoidGFkamlpOTQiLCJhIjoiY21lcHhkMjdzMG5rbjJqcjBsMjhzMjBoeSJ9.2Gto2teyk6x91OiXV-BjKQ"
+                                    data-mapbox-zoom-value="12"
+                                    data-mapbox-pitch-value="45"
+                                    data-mapbox-bearing-value="45"
+                                    data-mapbox-lat-value="-0.1276"
+                                    data-mapbox-lng-value="51.5074"
+                            ></div>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-400 mt-2 text-right">Interactive map. Live data available in the app.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

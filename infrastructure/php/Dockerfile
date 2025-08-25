@@ -37,6 +37,9 @@ RUN wget -q https://github.com/mozilla/geckodriver/releases/download/v"$GECKODRI
     tar -zxf geckodriver-v"$GECKODRIVER_VERSION"-linux64.tar.gz -C /usr/bin; \
     rm geckodriver-v"$GECKODRIVER_VERSION"-linux64.tar.gz
 
+# Installation de Node.js, npm et npx
+RUN apk add --no-cache nodejs npm
+
 RUN apk add --no-cache bash jq
 
 RUN echo "alias sf='bin/console'" >> ~/.bashrc

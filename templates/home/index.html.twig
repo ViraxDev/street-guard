@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    {{ parent() }} Accueil
-{% endblock %}
+{% block title %}StreetGuard — Real-Time Pickpocket Protection{% endblock %}
 
 {% block body %}
-    <div class="card">
-        <div class="card-body overflow-hidden p-lg-6">
-            <div class="row align-items-center">
-                <div class="col-lg-6"><img class="img-fluid" src="{{ asset('theme/img/icons/spot-illustrations/21.png') }}" alt="" /></div>
-                <div class="col-lg-6 ps-lg-4 my-5 text-center text-lg-start">
-                    <h3 class="text-primary">Edit me!</h3>
-                    <p class="lead">Create Something Beautiful.</p><a class="btn btn-falcon-primary" href="#">Getting started</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="relative min-h-screen" data-controller="home" style="font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';">
+    {% include 'includes/_ambient_bg.html.twig' %}
+
+    {% include 'includes/_navbar_custom.html.twig' %}
+
+    {% include 'includes/_hero.html.twig' %}
+
+    {% include 'includes/_features.html.twig' %}
+
+    {% include 'includes/_map.html.twig' %}
+
+    {% include 'includes/_partners.html.twig' %}
+
+    {% include 'includes/_stats.html.twig' %}
+
+    {% include 'includes/_footer.html.twig' %}
+</div>
 {% endblock %}

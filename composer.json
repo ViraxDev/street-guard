@@ -27,6 +27,7 @@
         "symfony/runtime": "7.3.*",
         "symfony/security-bundle": "7.3.*",
         "symfony/security-http": "7.3.*",
+        "symfony/stimulus-bundle": "^2.29",
         "symfony/translation": "7.3.*",
         "symfony/twig-bundle": "7.3.*",
         "symfony/validator": "7.3.*",

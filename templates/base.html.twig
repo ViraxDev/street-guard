@@ -1,74 +1,27 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="{{ app.request.locale }}" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}StreetGuard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('assets/tailwind.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Minimal fallback so text remains legible even if Tailwind fails to load */
+      html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+      body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; }
+    </style>
 
-        <!-- ===============================================-->
-        <!--    Document Title-->
-        <!-- ===============================================-->
-        <title>
-            {% block title %}{{ app_name | capitalize }} | {% endblock %}
-        </title>
+    {# Page-level stylesheets (CDNs, fonts, inline styles) #}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body class="bg-black text-white font-sans">
+    {% block body %}{% endblock %}
 
-        <!-- ===============================================-->
-        <!--    Favicons-->
-        <!-- ===============================================-->
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicons/apple-touch-icon.png') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicons/favicon-32x32.png') }}">
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicons/favicon-16x16.png') }}">
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicons/favicon.ico') }}">
-        <meta name="msapplication-TileImage" content="{{ asset('img/favicons/mstile-150x150.png') }}">
+    {{ importmap('app') }}
 
-        <meta name="theme-color" content="#ffffff">
-
-
-        <!-- ===============================================-->
-        <!--    Stylesheets-->
-        <!-- ===============================================-->
-
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('theme/css/spinner.css') }}">
-            <link rel="preconnect" href="https://fonts.gstatic.com">
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="preload" as="font">
-        {% endblock %}
-    </head>
-
-    <body>
-        <div id="loading-spinner">
-            <div class="spinner"></div>
-        </div>
-        <!-- ===============================================-->
-        <!--    Main Content-->
-        <!-- ===============================================-->
-        <main class="main" id="top">
-        <div class="container" data-layout="container">
-            {% include 'includes/_navbar.html.twig' %}
-
-            <div class="content">
-
-                {% include 'includes/_menu.html.twig' %}
-
-                {% block body %}{% endblock %}
-
-                {% include 'includes/_footer.html.twig' %}
-            </div>
-        </div>
-    </main>
-        <!-- ===============================================-->
-        <!--    End of Main Content-->
-        <!-- ===============================================-->
-
-
-        <!-- ===============================================-->
-        <!--    JavaScripts-->
-        <!-- ===============================================-->
-
-        {% block javascripts %}
-            <script src="{{ asset('theme/js/spinner.js') }}"></script>
-            {{ importmap('app') }}
-        {% endblock %}
-    </body>
+    {# Page-level scripts (CDNs, inline JS) #}
+    {% block javascripts %}{% endblock %}
+</body>
 </html>

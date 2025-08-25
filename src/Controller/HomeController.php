@@ -14,4 +14,10 @@ final class HomeController extends AbstractController
     {
         return $this->render('home/index.html.twig');
     }
+
+    #[Route('/map', name: 'app_map')]
+    public function map(): Response
+    {
+        return $this->render('map/fullscreen.html.twig');
+    }
 }
