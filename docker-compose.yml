@@ -51,7 +51,7 @@ services:
       - street-guard_network
 
   mailhog:
-    image: registry.gitlab.com/opencity-labs/mailhog:latest-arm
+    image: mailhog/mailhog:latest
     ports:
       - "1025:1025"  # SMTP port
       - "8025:8025"  # Web Interface
