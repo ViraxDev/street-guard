@@ -15,6 +15,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 abstract class AbstractController extends SymfonyAbstractController
 {
     use HandleTrait;
+    use ResponseHandlerTrait;
+
     protected Request $request;
 
     /** @phpstan-ignore-next-line */

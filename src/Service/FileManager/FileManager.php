@@ -15,6 +15,8 @@ final readonly class FileManager implements FileManagerInterface
     public function __construct(
         #[Autowire(param: 'upload_directory')]
         private string $uploadDirectory,
+        #[Autowire('%kernel.project_dir%')]
+        private string $projectDir,
     ) {
         $this->filesystem = new Filesystem();
     }
@@ -37,5 +39,10 @@ final readonly class FileManager implements FileManagerInterface
     public function removeFile(string $file): void
     {
         $this->filesystem->remove($this->uploadDirectory.'/'.$file);
+    }
+
+    public function getProjectDir(): string
+    {
+        return $this->projectDir;
     }
 }
