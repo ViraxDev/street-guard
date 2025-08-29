@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Dto\PartnerContactRequest;
-use App\Service\Mail\MailServiceInterface;
+use App\Service\Mail\PartnershipMailServiceInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
@@ -13,7 +13,7 @@ final class PartnershipController extends AbstractController
 {
     #[Route('/partnership/contact', name: 'partnership_submit', methods: ['POST'])]
     public function contact(
-        MailServiceInterface $mailService,
+        PartnershipMailServiceInterface $mailService,
         Request $request,
         #[MapRequestPayload] PartnerContactRequest $contactRequest,
     ): Response {
