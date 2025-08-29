@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 interface FileManagerInterface
 {
     public function upload(UploadedFile $file): string;
+
     public function getUploadDir(): string;
+
     public function removeFile(string $file): void;
 }

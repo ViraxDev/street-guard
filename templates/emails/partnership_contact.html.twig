@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Partnership Message - StreetGuard</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #111827;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            margin: 8px 0 0 0;
+            font-size: 16px;
+        }
+
+        .content {
+            padding: 32px 24px;
+        }
+
+        .field-group {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #10b981;
+        }
+
+        .field-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 12px;
+        }
+
+        .field-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .field {
+            flex: 1;
+        }
+
+        .field-label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .field-value {
+            color: #111827;
+            font-size: 16px;
+            word-break: break-word;
+        }
+
+        .message-field {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            border-left: 4px solid #06b6d4;
+        }
+
+        .message-content {
+            color: #111827;
+            font-size: 16px;
+            line-height: 1.7;
+            white-space: pre-line;
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 24px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .timestamp {
+            color: #6b7280;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 24px 16px;
+            }
+
+            .content {
+                padding: 24px 16px;
+            }
+
+            .field-row {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #111827;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: white;
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🤝 New Partnership Inquiry</h1>
+        <p>StreetGuard Partnership Portal</p>
+    </div>
+
+    <div class="content">
+        <div class="status-badge">New Message</div>
+
+        <div class="field-group">
+            <div class="field-row">
+                <div class="field">
+                    <span class="field-label">Contact Name</span>
+                    <div class="field-value">{{ data.name }}</div>
+                </div>
+                {% if data.organization %}
+                    <div class="field">
+                        <span class="field-label">Organization</span>
+                        <div class="field-value">{{ data.organization }}</div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <span class="field-label">Email Address</span>
+                    <div class="field-value">{{ data.email }}</div>
+                </div>
+                {% if data.phone %}
+                    <div class="field">
+                        <span class="field-label">Phone Number</span>
+                        <div class="field-value">{{ data.phone }}</div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <span class="field-label">Partnership Type</span>
+                    <div class="field-value">{{ data.topic|title }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message-field">
+            <span class="field-label">Message Details</span>
+            <div class="message-content">{{ data.message|nl2br }}</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="timestamp">
+            Message received on {{ 'now'|date('F j, Y at g:i A T') }}
+        </div>
+    </div>
+</div>
+</body>
+</html>
