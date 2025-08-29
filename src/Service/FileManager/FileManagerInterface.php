@@ -12,7 +12,5 @@ interface FileManagerInterface
 
     public function getUploadDir(): string;
 
-    public function getProjectDir(): string;
-
     public function removeFile(string $file): void;
 }

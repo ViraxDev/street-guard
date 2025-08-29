@@ -8,6 +8,7 @@ export default class extends Controller {
     if (!id) return
     document.dispatchEvent(new CustomEvent('modal:open', { detail: { id } }))
   }
+
   close(e) {
     if (e) e.preventDefault()
     const id = this.element.dataset.modalTriggerTargetId || ''

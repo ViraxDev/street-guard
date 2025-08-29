@@ -4,7 +4,7 @@ namespace App\Service\Mail;
 
 use App\Dto\PartnerContactRequest;
 
-interface MailServiceInterface
+interface PartnershipMailServiceInterface
 {
     public function sendPartnershipInquiry(PartnerContactRequest $request): void;
 }

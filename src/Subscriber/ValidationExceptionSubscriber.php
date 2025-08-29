@@ -32,7 +32,9 @@ final readonly class ValidationExceptionSubscriber implements EventSubscriberInt
             return;
         }
 
-        $response = new JsonResponse(array_map(fn (ConstraintViolation $violation) => [$violation->getPropertyPath() => $violation->getMessage()], iterator_to_array($validationException->getViolations())), Response::HTTP_BAD_REQUEST);
+        $response = new JsonResponse(array_map(fn (ConstraintViolation $violation) => [
+            $violation->getPropertyPath() => $violation->getMessage(),
+        ], iterator_to_array($validationException->getViolations())), Response::HTTP_BAD_REQUEST);
 
         $event->setResponse($response);
     }

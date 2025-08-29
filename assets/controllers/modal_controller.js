@@ -7,6 +7,7 @@ export default class extends Controller {
     stopPropagation(event) {
         event.stopPropagation()
     }
+
     connect() {
         this.opening = false;
         this.closing = false;

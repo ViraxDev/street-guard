@@ -8,7 +8,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Twig\Environment;
 
-final readonly class PartnershipMailService implements MailServiceInterface
+final readonly class PartnershipMailService implements PartnershipMailServiceInterface
 {
     public function __construct(
         private MailerInterface $mailer,
@@ -26,7 +26,7 @@ final readonly class PartnershipMailService implements MailServiceInterface
             ->from($this->senderEmail)
             ->replyTo($request->email)
             ->to($this->recipientEmail)
-            ->subject("New Partnership Inquiry: {$request->name}")
+            ->subject(sprintf('New Partnership Inquiry: %s', $request->name))
             ->html($this->renderPartnershipEmail($request));
 
         $this->mailer->send($email);
