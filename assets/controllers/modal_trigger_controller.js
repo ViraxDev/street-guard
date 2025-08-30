@@ -4,7 +4,6 @@ export default class extends Controller {
     static values = { targetId: String }
 
     connect() {
-        // Ajouter une classe pour indiquer que l'élément peut ouvrir une modale
         this.element.classList.add('modal-trigger')
     }
 
