@@ -322,3 +322,81 @@ html {
         background-position: 40px 40px;
     }
 }
+
+/* Amélioration for modals */
+.modal-overlay {
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-panel {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animation for flash messages */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.flash-message {
+    animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.flash-message.removing {
+    animation: slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Animation for form error messages */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-errors-appear {
+    animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Effet visuel pour les triggers de modale */
+.modal-trigger {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-trigger.clicking {
+    transform: scale(0.98);
+}
+
+.modal-trigger:active {
+    transform: scale(0.98);
+}
+
+/* Animation de hover plus douce */
+.modal-trigger:hover {
+    transform: translateY(-1px);
+}
+
+.modal-trigger:hover:not(.clicking) {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
