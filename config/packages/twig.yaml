@@ -3,6 +3,7 @@ twig:
     globals:
         app_name: '%app_name%'
         mapbox_token: '%env(MAPBOX_TOKEN)%'
+        admin_email: '%env(ADMIN_EMAIL)%'
 
 when@test:
     twig:
