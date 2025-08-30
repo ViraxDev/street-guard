@@ -1,9 +1,9 @@
 twig:
     file_name_pattern: '*.twig'
     globals:
-        upload_dir: '%upload_directory%'
         app_name: '%app_name%'
         mapbox_token: '%env(MAPBOX_TOKEN)%'
+        admin_email: '%env(ADMIN_EMAIL)%'
 
 when@test:
     twig:

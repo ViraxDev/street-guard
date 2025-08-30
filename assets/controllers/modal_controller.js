@@ -31,37 +31,47 @@ export default class extends Controller {
         if (e) e.preventDefault();
         if (this.opening) return;
         this.opening = true;
+
         this.element.classList.remove('hidden');
+
         requestAnimationFrame(() => {
-            this.overlayTarget.classList.remove('opacity-0');
-            this.overlayTarget.classList.add('opacity-100');
-            this.panelTarget.classList.remove('opacity-0', 'translate-y-2', 'scale-95');
-            this.panelTarget.classList.add('opacity-100', 'translate-y-0', 'scale-100');
-        })
+            requestAnimationFrame(() => {
+                this.overlayTarget.classList.remove('opacity-0');
+                this.overlayTarget.classList.add('opacity-100');
+                this.panelTarget.classList.remove('opacity-0', 'translate-y-4', 'scale-95');
+                this.panelTarget.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+            });
+        });
+
         this.boundOnKeydown = this.onKeydown.bind(this);
         document.addEventListener('keydown', this.boundOnKeydown);
         this.storeFocusable();
         this.focusFirst();
         document.body.classList.add('overflow-hidden');
+
+        // Durée augmentée pour correspondre au CSS
         setTimeout(() => {
             this.opening = false;
-        }, 200);
+        }, 400);
     }
 
     close(e) {
         if (e) e.preventDefault();
         if (this.closing) return;
         this.closing = true;
+
         this.overlayTarget.classList.remove('opacity-100');
         this.overlayTarget.classList.add('opacity-0');
         this.panelTarget.classList.remove('opacity-100', 'translate-y-0', 'scale-100');
-        this.panelTarget.classList.add('opacity-0', 'translate-y-2', 'scale-95');
+        this.panelTarget.classList.add('opacity-0', 'translate-y-4', 'scale-95');
+
+        // Durée augmentée pour correspondre au CSS
         setTimeout(() => {
             this.element.classList.add('hidden');
             document.removeEventListener('keydown', this.boundOnKeydown);
             document.body.classList.remove('overflow-hidden');
             this.closing = false;
-        }, 200);
+        }, 400);
     }
 
     backdrop(e) {
@@ -74,6 +84,11 @@ export default class extends Controller {
         const form = e.target;
         const formData = new FormData(form);
 
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'Sending...';
+        submitBtn.disabled = true;
+
         fetch(form.action, {
             method: 'POST',
             body: formData,
@@ -83,6 +98,9 @@ export default class extends Controller {
         })
             .then(response => response.json())
             .then(data => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+
                 if (data.success) {
                     this.showFlashMessage(data.message, 'success');
                     form.reset();
@@ -93,6 +111,8 @@ export default class extends Controller {
             })
             .catch(error => {
                 console.error('Error:', error);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
                 this.showFlashMessage('An error occurred. Please try again.', 'error');
             });
     }
@@ -131,18 +151,39 @@ export default class extends Controller {
     showFlashMessage(message, type) {
         // Remove any existing flash messages
         const existingMessages = document.querySelectorAll('.flash-message');
-        existingMessages.forEach(msg => msg.remove());
+        existingMessages.forEach(msg => {
+            msg.classList.add('removing');
+            setTimeout(() => msg.remove(), 400);
+        });
 
         const flashMessage = document.createElement('div');
-        flashMessage.className = `flash-message fixed top-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 ${
-            type === 'success' ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white'
-        }`;
-        flashMessage.textContent = message;
+        const baseClasses = 'flash-message fixed top-4 right-4 px-6 py-4 rounded-lg shadow-lg z-50 flex items-center space-x-3 max-w-md';
+        const typeClasses = type === 'success'
+            ? 'bg-emerald-500 text-white border border-emerald-400'
+            : 'bg-red-500 text-white border border-red-400';
+
+        flashMessage.className = `${baseClasses} ${typeClasses}`;
+
+        // Ajouter une icône
+        const icon = document.createElement('div');
+        icon.className = 'flex-shrink-0';
+        icon.innerHTML = type === 'success'
+            ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>'
+            : '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+
+        const messageText = document.createElement('span');
+        messageText.textContent = message;
+
+        flashMessage.appendChild(icon);
+        flashMessage.appendChild(messageText);
 
         document.body.appendChild(flashMessage);
 
         setTimeout(() => {
-            flashMessage.remove();
+            if (flashMessage.parentElement) {
+                flashMessage.classList.add('removing');
+                setTimeout(() => flashMessage.remove(), 400);
+            }
         }, 5000);
     }
 
@@ -155,20 +196,22 @@ export default class extends Controller {
         errorsDiv.querySelector('#nb-errors').textContent = `There were ${nbErrors} error${nbErrors > 1 ? 's' : ''} with your submission:`;
 
         const ul = document.createElement('ul');
-        ul.classList = 'ml-8 space-y-1';
+        ul.className = 'ml-8 space-y-1';
         ul.id = 'error-messages';
 
         errors.forEach(error => {
             const li = document.createElement('li');
-            li.classList = 'text-red-700';
+            li.className = 'text-red-700';
             const [key, value] = Object.entries(error)[0];
-
             li.textContent = `• ${value}`;
-            ul.append(li);
+            ul.appendChild(li);
         });
 
         errorsDiv.querySelector('#error-messages')?.remove();
-        errorsDiv.append(ul);
+        errorsDiv.appendChild(ul);
         errorsDiv.classList.remove('hidden');
+        errorsDiv.classList.add('form-errors-appear');
+
+        errorsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 }

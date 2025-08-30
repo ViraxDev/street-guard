@@ -29,7 +29,7 @@ deploy: ## Deploy the branch on remote server
 	printf "\n"; \
 	printf "$(RESET)"; \
 	printf "$(BLUE)Deploying branch: $$branch_name$(RESET)\n"; \
-	git fetch --all && git checkout "$$branch_name" && git reset --hard && git pull --rebase; \
+	git fetch --all && git reset --hard && git checkout "$$branch_name" && git pull --rebase; \
 	$(DOCKER_ROOT) composer install --no-dev --optimize-autoloader --no-interaction; \
 	$(DOCKER_ROOT) sh -lc "npm install && npx @tailwindcss/cli -i ./assets/styles/app.css -o ./public/assets/tailwind.css"; \
 	$(DOCKER_ROOT) php bin/console importmap:install; \

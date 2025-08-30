@@ -1,10 +1,72 @@
 {% extends 'bundles/TwigBundle/Exception/base.html.twig' %}
 
-{% block title %} {{ parent() ~ 'page.404'|trans  }}  {% endblock %}
-{% block status_code %}404{% endblock %}
+{% block title %}Page Not Found {{ parent() }}{% endblock %}
 
 {% block body %}
-    <p class="lead mt-4 text-800 font-sans-serif fw-semi-bold w-md-75 w-xl-100 mx-auto">{{ 'page.404'|trans }}</p>
-    <hr />
-    <a class="btn btn-primary btn-sm mt-3" href="{{ path('app_home') }}"><span class="fas fa-home me-2"></span>{{ 'homepage'|trans }}</a>
+    <div class="relative z-10 px-6 text-center max-w-2xl mx-auto">
+        <div class="relative mb-8 animate-blur-in">
+            <div class="pulse">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+            </div>
+            <h1 class="text-[120px] md:text-[180px] font-bold bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent leading-none select-none">
+                404
+            </h1>
+        </div>
+
+        <!-- Message principal -->
+        <div class="space-y-4 animate-slide-up delay-200">
+            <h2 class="text-2xl md:text-3xl font-semibold text-white">
+                Street Not Found
+            </h2>
+            <p class="text-lg text-gray-300 max-w-lg mx-auto">
+                Looks like this page wandered off the safe path. Don't worry, we'll help you get back to familiar territory.
+            </p>
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up delay-400">
+            <a href="{{ path('app_home') }}"
+               class="inline-flex items-center px-8 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-600 text-white font-medium hover:from-emerald-600 hover:to-cyan-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                </svg>
+                Back to Safety
+            </a>
+
+            <button onclick="history.back()"
+                    class="inline-flex items-center px-6 py-3 rounded-full border border-white/20 text-gray-200 font-medium hover:bg-white/10 hover:border-white/30 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                    <path d="m12 19-7-7 7-7"></path>
+                    <path d="M19 12H5"></path>
+                </svg>
+                Go Back
+            </button>
+        </div>
+
+        <!-- Suggestions utiles -->
+        <div class="mt-16 animate-fade-in delay-600">
+            <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md max-w-md mx-auto">
+                <h3 class="text-lg font-medium mb-4 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-emerald-400">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 18 18.75V21a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2.25a3.374 3.374 0 0 0 2.455-1.96z"></path>
+                    </svg>
+                    Quick Links
+                </h3>
+                <div class="space-y-3 text-sm">
+                    <a href="{{ path('app_home') }}#features" class="block text-gray-300 hover:text-white transition-colors">
+                        → How StreetGuard Works
+                    </a>
+                    <a href="{{ path('app_home') }}#map" class="block text-gray-300 hover:text-white transition-colors">
+                        → View Safety Map
+                    </a>
+                    <a href="{{ path('app_home') }}#partners" class="block text-gray-300 hover:text-white transition-colors">
+                        → Partner with Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
